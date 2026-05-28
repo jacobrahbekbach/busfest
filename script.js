@@ -11,42 +11,22 @@ const galleryDotsEl = document.getElementById("gallery-dots");
 
 const galleryMedia = [
   {
-    type: "video",
-    src: "assets/gallery/2025-05-17 15.38.48.mov",
-    poster: "assets/gallery/2025-05-17 15.38.48-poster.jpg",
-    mime: "video/quicktime"
-  },
-  {
-    type: "video",
-    src: "assets/gallery/2025-05-17 15.43.50.mov",
-    poster: "assets/gallery/2025-05-17 15.43.50-poster.jpg",
-    mime: "video/quicktime"
-  },
-  {
-    type: "video",
-    src: "assets/gallery/2025-05-17 16.26.01.mov",
-    poster: "assets/gallery/2025-05-17 16.26.01-poster.jpg",
-    mime: "video/quicktime"
-  },
-  {
     type: "image",
     src: "assets/gallery/2025-05-17 17.04.44.jpg"
   },
   {
+    type: "video",
+    src: "assets/gallery/2025-05-17 15.38.48.mov",
+    poster: "assets/gallery/2025-05-17 15.38.48-poster-5.jpg"
+  },
+  {
+    type: "video",
+    src: "assets/gallery/2025-05-17 15.43.50.mov",
+    poster: "assets/gallery/2025-05-17 15.43.50-poster.jpg"
+  },
+  {
     type: "image",
     src: "assets/gallery/2025-05-17 17.12.34.jpg"
-  },
-  {
-    type: "video",
-    src: "assets/gallery/2025-05-17 17.45.09.mov",
-    poster: "assets/gallery/2025-05-17 17.45.09-poster.jpg",
-    mime: "video/quicktime"
-  },
-  {
-    type: "video",
-    src: "assets/gallery/2025-05-17 18.00.53.mov",
-    poster: "assets/gallery/2025-05-17 18.00.53-poster.jpg",
-    mime: "video/quicktime"
   },
   {
     type: "image",
@@ -62,9 +42,32 @@ const galleryMedia = [
   },
   {
     type: "video",
+    src: "assets/gallery/2025-05-18 09.07.21-1.mov",
+    poster: "assets/gallery/2025-05-18 09.07.21-1-poster-3.jpg"
+  },
+  {
+    type: "video",
+    src: "assets/gallery/2025-05-17 16.26.01.mov",
+    poster: "assets/gallery/2025-05-17 16.26.01-poster-2.jpg"
+  },
+  {
+    type: "video",
+    src: "assets/gallery/2025-05-17 17.45.09.mov",
+    poster: "assets/gallery/2025-05-17 17.45.09-poster-1.jpg"
+  },
+  {
+    type: "image",
+    src: "assets/gallery/2025-05-19 22.01.32.jpg"
+  },
+  {
+    type: "video",
+    src: "assets/gallery/2025-05-17 18.00.53.mov",
+    poster: "assets/gallery/2025-05-17 18.00.53-poster-4.jpg"
+  },
+  {
+    type: "video",
     src: "assets/gallery/2025-05-17 19.16.17.mov",
-    poster: "assets/gallery/2025-05-17 19.16.17-poster.jpg",
-    mime: "video/quicktime"
+    poster: "assets/gallery/2025-05-17 19.16.17-poster-4.jpg"
   },
   {
     type: "image",
@@ -73,24 +76,12 @@ const galleryMedia = [
   {
     type: "video",
     src: "assets/gallery/2025-05-18 09.07.21.mov",
-    poster: "assets/gallery/2025-05-18 09.07.21-poster.jpg",
-    mime: "video/quicktime"
-  },
-  {
-    type: "video",
-    src: "assets/gallery/2025-05-18 09.07.21-1.mov",
-    poster: "assets/gallery/2025-05-18 09.07.21-1-poster.jpg",
-    mime: "video/quicktime"
+    poster: "assets/gallery/2025-05-18 09.07.21-poster-3.jpg"
   },
   {
     type: "video",
     src: "assets/gallery/2025-05-18 09.07.21-2.mov",
-    poster: "assets/gallery/2025-05-18 09.07.21-2-poster.jpg",
-    mime: "video/quicktime"
-  },
-  {
-    type: "image",
-    src: "assets/gallery/2025-05-19 22.01.32.jpg"
+    poster: "assets/gallery/2025-05-18 09.07.21-2-poster-3.jpg"
   }
 ];
 
@@ -188,8 +179,7 @@ function renderGallerySlides() {
     .map((media, index) => {
       if (media.type === "video") {
         const posterAttr = media.poster ? ` poster="${media.poster}"` : "";
-        const mime = media.mime || "video/mp4";
-        return `<article class="slide"><div class="video-shell"><video playsinline preload="metadata"${posterAttr}><source src="${media.src}" type="${mime}" />Din browser understotter ikke videoafspilning.</video><button class="video-play" type="button" aria-label="Afspil video"><span class="video-play-icon" aria-hidden="true"></span></button></div></article>`;
+        return `<article class="slide"><div class="video-shell"><video playsinline webkit-playsinline preload="metadata"${posterAttr}><source src="${media.src}" />Din browser understotter ikke videoafspilning.</video><button class="video-play" type="button" aria-label="Afspil video"><span class="video-play-icon" aria-hidden="true"></span></button></div></article>`;
       }
 
       const alt = media.alt || `Galleri medie ${index + 1}`;
@@ -239,6 +229,7 @@ function initGallery() {
     }
 
     try {
+      videoEl.muted = false;
       videoEl.controls = true;
       await videoEl.play();
       videoShellEl?.classList.add("is-playing");
@@ -302,11 +293,6 @@ function initGallery() {
     galleryTrackEl.style.transform = `translateX(-${currentIndex * 100}%)`;
     scheduleTrackHeightUpdate();
     renderDots();
-
-    const activeSlide = slides[currentIndex];
-    const activeVideo = activeSlide?.querySelector("video");
-    const activeShell = activeSlide?.querySelector(".video-shell");
-    startVideo(activeVideo, activeShell);
   }
 
   galleryPrevEl?.addEventListener("click", () => goTo(currentIndex - 1));
