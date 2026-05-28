@@ -39,6 +39,10 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
+  width: 100vw;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
   z-index: -1;
   background: radial-gradient(circle at 20% 10%, rgba(255, 183, 3, 0.24) 0%, transparent 25%),
     radial-gradient(circle at 85% 5%, rgba(255, 77, 109, 0.2) 0%, transparent 30%),
