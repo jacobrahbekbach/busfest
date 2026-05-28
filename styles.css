@@ -22,8 +22,24 @@ body {
 }
 
 body {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  min-height: 100dvh;
+  isolation: isolate;
   font-family: "Manrope", sans-serif;
   color: var(--text);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   background: radial-gradient(circle at 20% 10%, rgba(255, 183, 3, 0.24) 0%, transparent 25%),
     radial-gradient(circle at 85% 5%, rgba(255, 77, 109, 0.2) 0%, transparent 30%),
     linear-gradient(165deg, rgba(15, 26, 72, 0.54), rgba(17, 63, 103, 0.5) 50%, rgba(24, 169, 153, 0.44)),
@@ -31,11 +47,6 @@ body {
   background-size: auto, auto, auto, cover;
   background-position: center, center, center, center top;
   background-repeat: no-repeat;
-  background-attachment: scroll, scroll, scroll, fixed;
-  display: grid;
-  place-items: center;
-  padding: 20px;
-  overflow-x: hidden;
 }
 
 .noise {
