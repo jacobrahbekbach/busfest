@@ -11,19 +11,86 @@ const galleryDotsEl = document.getElementById("gallery-dots");
 
 const galleryMedia = [
   {
-    type: "image",
-    src: "assets/busfest-bg.png",
-    alt: "Busfest stemningsbillede"
+    type: "video",
+    src: "assets/gallery/2025-05-17 15.38.48.mov",
+    poster: "assets/gallery/2025-05-17 15.38.48-poster.jpg",
+    mime: "video/quicktime"
   },
   {
     type: "video",
-    src: "assets/gallery/2026-05-25 20.34.10.mov",
-    poster: "assets/gallery/2026-05-25 20.34.10-poster.jpg"
+    src: "assets/gallery/2025-05-17 15.43.50.mov",
+    poster: "assets/gallery/2025-05-17 15.43.50-poster.jpg",
+    mime: "video/quicktime"
+  },
+  {
+    type: "video",
+    src: "assets/gallery/2025-05-17 16.26.01.mov",
+    poster: "assets/gallery/2025-05-17 16.26.01-poster.jpg",
+    mime: "video/quicktime"
   },
   {
     type: "image",
-    src: "assets/busfest-bg.png",
-    alt: "Upload billede 3"
+    src: "assets/gallery/2025-05-17 17.04.44.jpg"
+  },
+  {
+    type: "image",
+    src: "assets/gallery/2025-05-17 17.12.34.jpg"
+  },
+  {
+    type: "video",
+    src: "assets/gallery/2025-05-17 17.45.09.mov",
+    poster: "assets/gallery/2025-05-17 17.45.09-poster.jpg",
+    mime: "video/quicktime"
+  },
+  {
+    type: "video",
+    src: "assets/gallery/2025-05-17 18.00.53.mov",
+    poster: "assets/gallery/2025-05-17 18.00.53-poster.jpg",
+    mime: "video/quicktime"
+  },
+  {
+    type: "image",
+    src: "assets/gallery/2025-05-17 18.45.07.jpg"
+  },
+  {
+    type: "image",
+    src: "assets/gallery/2025-05-17 18.56.34.jpg"
+  },
+  {
+    type: "image",
+    src: "assets/gallery/2025-05-17 19.00.52-1.jpg"
+  },
+  {
+    type: "video",
+    src: "assets/gallery/2025-05-17 19.16.17.mov",
+    poster: "assets/gallery/2025-05-17 19.16.17-poster.jpg",
+    mime: "video/quicktime"
+  },
+  {
+    type: "image",
+    src: "assets/gallery/2025-05-17 20.04.00.jpg"
+  },
+  {
+    type: "video",
+    src: "assets/gallery/2025-05-18 09.07.21.mov",
+    poster: "assets/gallery/2025-05-18 09.07.21-poster.jpg",
+    mime: "video/quicktime"
+  },
+  {
+    type: "video",
+    src: "assets/gallery/2025-05-18 09.07.21-1.mov",
+    poster: "assets/gallery/2025-05-18 09.07.21-1-poster.jpg",
+    mime: "video/quicktime"
+  },
+  {
+    type: "video",
+    src: "assets/gallery/2025-05-18 09.07.21-2.mov",
+    poster: "assets/gallery/2025-05-18 09.07.21-2-poster.jpg",
+    mime: "video/quicktime"
+  },
+  {
+    type: "image",
+    src: "assets/gallery/2025-05-19 22.01.32.jpg"
   }
 ];
 
@@ -121,7 +188,8 @@ function renderGallerySlides() {
     .map((media, index) => {
       if (media.type === "video") {
         const posterAttr = media.poster ? ` poster="${media.poster}"` : "";
-        return `<article class="slide"><div class="video-shell"><video playsinline preload="metadata"${posterAttr}><source src="${media.src}" type="video/mp4" />Din browser understotter ikke videoafspilning.</video><button class="video-play" type="button" aria-label="Afspil video"><span class="video-play-icon" aria-hidden="true"></span></button></div></article>`;
+        const mime = media.mime || "video/mp4";
+        return `<article class="slide"><div class="video-shell"><video playsinline preload="metadata"${posterAttr}><source src="${media.src}" type="${mime}" />Din browser understotter ikke videoafspilning.</video><button class="video-play" type="button" aria-label="Afspil video"><span class="video-play-icon" aria-hidden="true"></span></button></div></article>`;
       }
 
       const alt = media.alt || `Galleri medie ${index + 1}`;

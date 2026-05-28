@@ -179,6 +179,18 @@ h1 {
   letter-spacing: 0.2px;
 }
 
+.date-highlight {
+  display: inline-block;
+  padding: 3px 0;
+  background: linear-gradient(90deg, #ffe66d 0%, #ffffff 28%, #59f8e8 52%, #ff8fab 74%, #ffe66d 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 18px rgba(255, 230, 109, 0.24);
+  animation: shimmerDate 3.2s linear infinite, pulseDateGlow 1.8s ease-in-out infinite alternate, bounceDate 2.2s ease-in-out infinite;
+}
+
 .countdown-wrap {
   margin-top: 19px;
   border-radius: 18px;
@@ -257,6 +269,51 @@ h1 {
   margin: 0 0 10px;
   color: var(--muted);
   line-height: 1.45;
+}
+
+.afterparty-box {
+  margin-top: 14px;
+  padding: 13px 14px;
+  border-radius: 14px;
+  background: linear-gradient(120deg, rgba(255, 230, 109, 0.2), rgba(255, 90, 95, 0.16), rgba(89, 248, 232, 0.14));
+  border: 1px solid rgba(255, 230, 109, 0.32);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.afterparty-box p {
+  margin: 0;
+  color: #f4f8ff;
+  line-height: 1.45;
+}
+
+.afterparty-label {
+  margin-bottom: 5px !important;
+  color: var(--accent) !important;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.spotify-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 4px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: linear-gradient(110deg, rgba(30, 215, 96, 0.62), rgba(89, 248, 232, 0.42));
+  color: #f4f8ff;
+  font-weight: 800;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 24px rgba(30, 215, 96, 0.12);
+}
+
+.spotify-link:focus-visible,
+.spotify-link:hover {
+  transform: translateY(-1px);
 }
 
 .participants-list {
@@ -428,6 +485,40 @@ h1 {
   to {
     opacity: 1;
     transform: scale(1.18);
+  }
+}
+
+@keyframes shimmerDate {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 220% 50%;
+  }
+}
+
+@keyframes pulseDateGlow {
+  from {
+    filter: drop-shadow(0 0 4px rgba(255, 230, 109, 0.22));
+  }
+  to {
+    filter: drop-shadow(0 0 12px rgba(89, 248, 232, 0.4));
+  }
+}
+
+@keyframes bounceDate {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(-3px);
+  }
+  55% {
+    transform: translateY(0);
+  }
+  72% {
+    transform: translateY(-1px);
   }
 }
 
