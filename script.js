@@ -148,6 +148,7 @@ function initGallery() {
   let touchCurrentX = 0;
   let touchCurrentY = 0;
   let isTouching = false;
+  let resizeFrameId = 0;
 
   function stopVideo(videoEl, videoShellEl) {
     if (!videoEl) {
@@ -180,6 +181,17 @@ function initGallery() {
     }
   }
 
+  function scheduleTrackHeightUpdate() {
+    if (resizeFrameId) {
+      cancelAnimationFrame(resizeFrameId);
+    }
+
+    resizeFrameId = requestAnimationFrame(() => {
+      resizeFrameId = 0;
+      updateTrackHeight();
+    });
+  }
+
   function updateTrackHeight() {
     const activeSlide = slides[currentIndex];
     if (!activeSlide) {
@@ -187,9 +199,9 @@ function initGallery() {
     }
 
     const mediaEl = activeSlide.querySelector("img, video");
-    const nextHeight = mediaEl
-      ? mediaEl.getBoundingClientRect().height
-      : activeSlide.getBoundingClientRect().height;
+    const mediaHeight = mediaEl ? mediaEl.getBoundingClientRect().height : 0;
+    const slideHeight = activeSlide.getBoundingClientRect().height;
+    const nextHeight = Math.max(mediaHeight, slideHeight, 180);
 
     if (nextHeight > 0) {
       galleryTrackEl.style.height = `${Math.ceil(nextHeight)}px`;
@@ -220,7 +232,7 @@ function initGallery() {
 
     currentIndex = safeIndex;
     galleryTrackEl.style.transform = `translateX(-${currentIndex * 100}%)`;
-    updateTrackHeight();
+    scheduleTrackHeightUpdate();
     renderDots();
 
     const activeSlide = slides[currentIndex];
@@ -290,7 +302,12 @@ function initGallery() {
   slides.forEach((slide) => {
     const imageEl = slide.querySelector("img");
     if (imageEl) {
-      imageEl.addEventListener("load", updateTrackHeight);
+      if (imageEl.complete) {
+        scheduleTrackHeightUpdate();
+      } else {
+        imageEl.addEventListener("load", scheduleTrackHeightUpdate);
+      }
+      imageEl.addEventListener("error", scheduleTrackHeightUpdate);
     }
 
     const videoEl = slide.querySelector("video");
@@ -302,27 +319,28 @@ function initGallery() {
       videoEl.addEventListener("play", () => {
         videoEl.controls = true;
         videoShellEl?.classList.add("is-playing");
-        updateTrackHeight();
+        scheduleTrackHeightUpdate();
       });
 
       videoEl.addEventListener("pause", () => {
         videoEl.controls = false;
         videoShellEl?.classList.remove("is-playing");
-        updateTrackHeight();
+        scheduleTrackHeightUpdate();
       });
 
       videoEl.addEventListener("ended", () => {
         stopVideo(videoEl, videoShellEl);
-        updateTrackHeight();
+        scheduleTrackHeightUpdate();
       });
 
-      videoEl.addEventListener("loadedmetadata", updateTrackHeight);
-      videoEl.addEventListener("loadeddata", updateTrackHeight);
-      videoEl.addEventListener("play", updateTrackHeight);
+      videoEl.addEventListener("loadedmetadata", scheduleTrackHeightUpdate);
+      videoEl.addEventListener("loadeddata", scheduleTrackHeightUpdate);
+      videoEl.addEventListener("canplay", scheduleTrackHeightUpdate);
+      videoEl.addEventListener("play", scheduleTrackHeightUpdate);
     }
   });
 
-  window.addEventListener("resize", updateTrackHeight);
+  window.addEventListener("resize", scheduleTrackHeightUpdate);
 
   goTo(0);
 }
