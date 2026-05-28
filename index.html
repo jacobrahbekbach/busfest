@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Invitation til årets vildeste busfest" />
+  <title>Busfest 2026 Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="lights" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <main class="card">
+    <p class="tag">Busfesten banker på</p>
+    <h1>BUSFEST 2026</h1>
+    <p class="lead">Årets busfest nærmer sig, og du er inviteret. Vi glæder os til et brag af en fest med kolde øl, højt humør og god musik hele vejen.</p>
+
+    <section class="details" aria-label="Afgangstid">
+      <div class="detail-item">
+        <h2>Afgangstid</h2>
+        <p>13. juni 2026 kl. 15:30</p>
+      </div>
+    </section>
+
+    <section class="countdown-wrap" aria-label="Nedtælling">
+      <p class="countdown-title">Nedtælling til afgang</p>
+      <div class="date-boxes" aria-label="Nedtælling" role="timer" aria-live="polite">
+        <div class="date-box">
+          <span class="date-value" id="days">00</span>
+          <span class="date-label">Dag</span>
+        </div>
+        <div class="date-box">
+          <span class="date-value" id="hours">00</span>
+          <span class="date-label">Time</span>
+        </div>
+        <div class="date-box">
+          <span class="date-value" id="seconds">00</span>
+          <span class="date-label">Sek</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="program" class="program" aria-label="Turplan">
+      <h2>Plan for turen</h2>
+      <p class="section-intro">Kom gerne et kvarter inden afgang, så vi kan komme godt fra start.</p>
+      <ul>
+        <li><strong>15:30</strong> - Afgang fra Aarhus Musikhus</li>
+        <li><strong>Første officielle stop</strong> - Ulstrup</li>
+        <li><strong>Aftensmad</strong> - Silkeborg (menu: kebabruller)</li>
+        <li><strong>Sidste stop</strong> - Skoven i Skanderborg</li>
+        <li><strong>Ca. 20:30</strong> - Tilbage ved Aarhus Musikhus</li>
+      </ul>
+      <p class="section-intro">Undervejs serveres kolde fadøl, cidere, shots og vand i bussen.</p>
+      <p class="section-intro">Afterparty foregår på Tir Na Noq, hvor der er booket bord til alle, der vil med videre.</p>
+    </section>
+
+    <section class="program" aria-label="Fotogalleri">
+      <h2>Se minder fra sidste års festivitas her</h2>
+      <div class="gallery" id="gallery" aria-label="Swipe galleri">
+        <div class="gallery-track" id="gallery-track">
+          <article class="slide">
+            <img src="assets/busfest-bg.png" alt="Busfest stemningsbillede" />
+          </article>
+          <article class="slide">
+            <p>Upload billede 2</p>
+          </article>
+          <article class="slide">
+            <p>Upload billede 3</p>
+          </article>
+        </div>
+        <div class="gallery-controls" aria-label="Galleri navigation">
+          <button class="gallery-btn" id="gallery-prev" type="button" aria-label="Forrige billede">Forrige</button>
+          <button class="gallery-btn" id="gallery-next" type="button" aria-label="Næste billede">Næste</button>
+        </div>
+        <div class="gallery-dots" id="gallery-dots" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section class="program" aria-label="Deltagerliste">
+      <h2>Deltagerliste</h2>
+      <p class="section-intro">Her kommer navnene på alle deltagere. Du kan tilføje flere senere.</p>
+      <ul id="participants" class="participants-list">
+        <li>Navn kommer snart</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
