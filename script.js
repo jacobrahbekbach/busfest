@@ -1,6 +1,7 @@
 const eventDate = new Date("2026-06-13T15:30:00+02:00");
 const daysEl = document.getElementById("days");
 const hoursEl = document.getElementById("hours");
+const minutesEl = document.getElementById("minutes");
 const secondsEl = document.getElementById("seconds");
 const participantsEl = document.getElementById("participants");
 const galleryEl = document.getElementById("gallery");
@@ -136,6 +137,7 @@ function updateCountdown() {
   if (difference <= 0) {
     daysEl.textContent = "00";
     hoursEl.textContent = "00";
+    minutesEl.textContent = "00";
     secondsEl.textContent = "00";
     return;
   }
@@ -143,10 +145,12 @@ function updateCountdown() {
   const secondsTotal = Math.floor(difference / 1000);
   const days = Math.floor(secondsTotal / (24 * 60 * 60));
   const hours = Math.floor((secondsTotal % (24 * 60 * 60)) / 3600);
+  const minutes = Math.floor((secondsTotal % 3600) / 60);
   const seconds = secondsTotal % 60;
 
   daysEl.textContent = formatNumber(days);
   hoursEl.textContent = formatNumber(hours);
+  minutesEl.textContent = formatNumber(minutes);
   secondsEl.textContent = formatNumber(seconds);
 }
 
